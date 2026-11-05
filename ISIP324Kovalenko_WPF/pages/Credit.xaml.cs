@@ -25,4 +25,6 @@ namespace ISIP324Kovalenko_WPF.pages
             InitializeComponent();
         }
     }
+
+    
 }
