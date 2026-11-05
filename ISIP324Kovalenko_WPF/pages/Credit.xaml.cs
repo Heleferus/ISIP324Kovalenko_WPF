@@ -24,7 +24,12 @@ namespace ISIP324Kovalenko_WPF.pages
         {
             InitializeComponent();
         }
-    }
 
-    
+
+        private void LoanSliders_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+
+        }
+    }
 }
