@@ -46,5 +46,6 @@ namespace ISIP324Kovalenko_WPF
                 WelcomeTextBlock.Visibility = Visibility.Collapsed;
             }
         }
+
     }
 }

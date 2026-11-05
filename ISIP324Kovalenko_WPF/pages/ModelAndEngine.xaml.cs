@@ -35,13 +35,16 @@ namespace ISIP324Kovalenko_WPF.pages
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("Pages/Colors.xaml", UriKind.Relative));
+            if (NavigationService.CanGoForward)
+            {
+                NavigationService.GoForward();
+            }
+            else
+            {
+                NavigationService.Navigate(new Uri("pages/Colors.xaml", UriKind.Relative));
+            }
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
         private void ModelComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
            
