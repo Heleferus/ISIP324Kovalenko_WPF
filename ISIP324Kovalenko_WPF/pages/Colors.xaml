@@ -1,1 +1,28 @@
-﻿
+﻿<Page x:Class="ISIP324Kovalenko_WPF.pages.Colors"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+
+        <StackPanel Style="{StaticResource SectionPanelStyle}">
+            <StackPanel Margin="14">
+                <TextBlock Text="Цвет кузова:" Style="{StaticResource SubHeaderTextStyle}"/>
+                <ComboBox x:Name="ColorComboBox"
+                          Style="{StaticResource InputComboBoxStyle}"
+                          SelectionChanged="ColorComboBox_SelectionChanged"/>
+                <TextBlock x:Name="ColorPriceTextBlock"
+                           Text="Доплата за цвет: 0 ₽"
+                           Style="{StaticResource NormalTextStyle}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Style="{StaticResource SectionPanelStyle}">
+            <StackPanel Margin="14">
+                <TextBlock Text="Дополнительные опции:" Style="{StaticResource SubHeaderTextStyle}"/>
+                <StackPanel x:Name="OptionsStackPanel" Margin="0,4,0,8"/>
+                <TextBlock x:Name="OptionsTotalTextBlock"
+                           Text="Стоимость выбранных опций: 0 ₽"
+                           Style="{StaticResource PriceTextStyle}"/>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+</Page>
