@@ -25,17 +25,26 @@ namespace ISIP324Kovalenko_WPF
             InitializeComponent();
         }
 
-        private void StartButton_Click(object sender, RoutedEventArgs e)
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            if (MainFrame != null)
+            if (MainFrame.CanGoBack)
             {
-                MainFrame.Navigate(new Uri("pages/ModelAndEngine.xaml", UriKind.Relative));
+                MainFrame.GoBack();
             }
         }
 
-        private void MainFrame_Navigated(object sender, NavigationEventArgs e)
+        private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-           
+            if (MainFrame.CanGoForward)
+            {
+                MainFrame.GoForward();
+            }
+            else
+            {
+                MainFrame.Navigate(new Uri("Pages/ModelAndEngine.xaml", UriKind.Relative));
+                WelcomeTextBlock.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

@@ -1,23 +1,41 @@
 ﻿<Page x:Class="ISIP324Kovalenko_WPF.pages.ModelAndEngine"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:ISIP324Kovalenko_WPF.pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="ModelAndEngine">
+      Loaded="Page_Loaded">
+    <StackPanel>
+        <TextBlock Text="Шаг 1. Выбор модели и типа двигателя" Style="{StaticResource HeaderTextStyle}"/>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
-        </Grid.RowDefinitions>
-        
-        <Button x:Name="BackButton" Content="Назад" Width="100" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" Click="BackButton_Click"/>
-        <Button x:Name="NextButton" Content="Далее" Width="100" Height="30" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Click="NextButton_Click"/>
-        <TextBlock Text="1/5" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <ProgressBar x:Name="ProgressBar" Grid.Row="2" Height="20" Width="300" Minimum="1" Maximum="5" Value="0" Margin="10"/>
-    </Grid>
+        <StackPanel Style="{StaticResource SectionPanelStyle}">
+            <StackPanel Margin="14">
+                <TextBlock Text="Выберите модель автомобиля:" Style="{StaticResource SubHeaderTextStyle}"/>
+                <ComboBox x:Name="ModelComboBox"
+                          Style="{StaticResource InputComboBoxStyle}"
+                          SelectionChanged="ModelComboBox_SelectionChanged"/>
+                <TextBlock x:Name="BasePriceTextBlock"
+                           Text="Базовая стоимость: 0 ₽"
+                           Style="{StaticResource NormalTextStyle}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Style="{StaticResource SectionPanelStyle}">
+            <StackPanel Margin="14">
+                <TextBlock Text="Выберите тип двигателя:" Style="{StaticResource SubHeaderTextStyle}"/>
+                <ComboBox x:Name="EngineComboBox"
+                          Style="{StaticResource InputComboBoxStyle}"
+                          SelectionChanged="EngineComboBox_SelectionChanged"/>
+                <TextBlock x:Name="EngineSurchargeTextBlock"
+                           Text="Доплата за двигатель: 0 ₽"
+                           Style="{StaticResource NormalTextStyle}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Style="{StaticResource SectionPanelStyle}">
+            <StackPanel Margin="14">
+                <TextBlock Text="Промежуточный расчёт по шагу 1:" Style="{StaticResource SubHeaderTextStyle}"/>
+                <TextBlock x:Name="Step1SummaryTextBlock"
+                           Text="Итого за модель с выбранным двигателем: 0 ₽"
+                           Style="{StaticResource PriceTextStyle}"/>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
 </Page>
