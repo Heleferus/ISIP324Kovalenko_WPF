@@ -18,7 +18,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock x:Name="StepTitleTextBlock" Grid.Column="0" Text="Шаг 0 из 5" FontSize="14" />
+                <TextBlock x:Name="StepTitleTextBlock" Grid.Column="0" Text="Шаг 1 из 5" FontSize="14" />
 
                 <TextBlock x:Name="TopTotalPriceTextBlock" Grid.Column="1" Text="Текущая стоимость: 0 ₽"  FontSize="16"  />
             </Grid>
@@ -26,8 +26,7 @@
             <ProgressBar x:Name="StepProgressBar" Minimum="1" Maximum="5" Value="1" Height="14" Margin="12,0,12,12" />
         </StackPanel>
 
-        <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden"/>
-        <TextBlock Grid.Row="1" x:Name="WelcomeTextBlock" Text="Добро пожаловать в конфигуратор автомобиля" Margin="12,10,12,10" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" Navigated="MainFrame_Navigated"/>
 
         <Grid Grid.Row="2"  Margin="0,8,0,0">
             <Grid.ColumnDefinitions>
