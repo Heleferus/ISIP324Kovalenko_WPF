@@ -24,5 +24,18 @@ namespace ISIP324Kovalenko_WPF
         {
             InitializeComponent();
         }
+
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MainFrame != null)
+            {
+                MainFrame.Navigate(new Uri("pages/ModelAndEngine.xaml", UriKind.Relative));
+            }
+        }
+
+        private void MainFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+           
+        }
     }
 }
