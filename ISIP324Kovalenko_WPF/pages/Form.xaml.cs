@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +24,11 @@ namespace ISIP324Kovalenko_WPF.pages
         public Form()
         {
             InitializeComponent();
+        }
+
+        private void ContactTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
         }
     }
 }
