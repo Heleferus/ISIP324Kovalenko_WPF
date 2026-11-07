@@ -29,7 +29,6 @@
 
         <StackPanel Style="{StaticResource SectionPanelStyle}">
             <StackPanel Margin="14">
-                <TextBlock Text="Промежуточный расчёт по шагу 1:" Style="{StaticResource SubHeaderTextStyle}"/>
                 <TextBlock x:Name="Step1SummaryTextBlock"
                            Text="Итого за модель с выбранным двигателем: 0 ₽"
                            Style="{StaticResource PriceTextStyle}"/>

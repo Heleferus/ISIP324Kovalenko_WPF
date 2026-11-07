@@ -1,52 +1,64 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ISIP324Kovalenko_WPF.pages
 {
-    /// <summary>
-    /// Логика взаимодействия для Colors.xaml
-    /// </summary>
     public partial class Colors : Page
     {
         public Colors()
         {
             InitializeComponent();
-        }
+            ColorComboBox.ItemsSource = MainWindow.ColorsList;
+            ColorComboBox.SelectedIndex = MainWindow.ColorIndex;
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (NavigationService.CanGoBack)
+            for (int i = 0; i < MainWindow.OptionsList.Length; i++)
             {
-                NavigationService.GoBack();
+                CheckBox cb = new CheckBox
+                {
+                    Content = $"{MainWindow.OptionsList[i]} — {MainWindow.OptionPrices[i]} ₽",
+                    Tag = i,
+                    Margin = new Thickness(0, 4, 0, 4),
+                    IsChecked = MainWindow.SelectedOptionIndices.Contains(i)
+                };
+                cb.Checked += OptionCheckBox_Changed;
+                cb.Unchecked += OptionCheckBox_Changed;
+                OptionsStackPanel.Children.Add(cb);
             }
-        }
 
-        private void NextButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (NavigationService.CanGoForward)
-            {
-                NavigationService.GoForward();
-            }
-            else
-            {
-                NavigationService.Navigate(new Uri("pages/AdditionalOptions.xaml", UriKind.Relative));
-            }
+            UpdateTexts();
         }
 
         private void ColorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            ComboBox cb = sender as ComboBox;
+            if (cb != null && cb.SelectedIndex >= 0)
+            {
+                MainWindow.ColorIndex = cb.SelectedIndex;
+                UpdateTexts();
+            }
+        }
+
+        private void OptionCheckBox_Changed(object sender, RoutedEventArgs e)
+        {
+            if (sender is CheckBox cb)
+            {
+                int index = (int)cb.Tag;
+                if (cb.IsChecked == true && !MainWindow.SelectedOptionIndices.Contains(index))
+                    MainWindow.SelectedOptionIndices.Add(index);
+                else
+                    MainWindow.SelectedOptionIndices.Remove(index);
+
+                UpdateTexts();
+            }
+        }
+
+        private void UpdateTexts()
+        {
+            ColorPriceTextBlock.Text = $"Доплата за цвет: {MainWindow.ColorPrice} ₽";
+            OptionsTotalTextBlock.Text = $"Стоимость выбранных опций: {MainWindow.OptionsPrice} ₽";
+
+            MainWindow win = Application.Current.MainWindow as MainWindow;
+            if (win != null) win.RefreshConfigurationSummary();
         }
     }
 }
