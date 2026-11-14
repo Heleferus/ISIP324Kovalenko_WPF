@@ -24,5 +24,20 @@ namespace ISIP324Kovalenko_WPF
         {
             InitializeComponent();
         }
+
+        private void ProductsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new Page.Products());
+        }
+
+        private void CartMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new Page.Cart());
+        }
+
+        private void OrderMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new Page.Order());
+        }
     }
 }

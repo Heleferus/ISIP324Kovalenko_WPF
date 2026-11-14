@@ -79,6 +79,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pagees\Cart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pagees\Order.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pagees\Products.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Order.cs">
@@ -86,6 +98,15 @@
     </Compile>
     <Compile Include="OrderItem.cs">
       <DependentUpon>PR9.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pagees\Cart.xaml.cs">
+      <DependentUpon>Cart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pagees\Order.xaml.cs">
+      <DependentUpon>Order.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pagees\Products.xaml.cs">
+      <DependentUpon>Products.xaml</DependentUpon>
     </Compile>
     <Compile Include="PR9.Context.cs">
       <AutoGen>True</AutoGen>
@@ -139,6 +160,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\headphones.png" />
+    <Resource Include="Images\keyboard.png" />
+    <Resource Include="Images\monitor.png" />
+    <Resource Include="Images\mouse.png" />
+    <Resource Include="Images\mousepad.png" />
+    <Resource Include="Images\webcam.png" />
     <Content Include="PR9.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PR9.Context.cs</LastGenOutput>

@@ -5,6 +5,15 @@
         Width="860" Height="640"
         MinWidth="760" MinHeight="560">
     <Grid>
-        
+       <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Header="Продукты" FontSize="14" FontWeight="Bold" Click="ProductsMenuItem_Click"/>
+            <MenuItem Header="Корзина" FontSize="14" FontWeight="Bold" Click="CartMenuItem_Click"/>
+            <MenuItem Header="Заказы" FontSize="14" FontWeight="Bold" Click="OrderMenuItem_Click"/>
+        </Menu>
+        <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>
