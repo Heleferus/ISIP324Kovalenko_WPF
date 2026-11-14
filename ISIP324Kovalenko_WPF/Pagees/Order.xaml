@@ -13,21 +13,25 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+        <WrapPanel Grid.Row="0" Margin="10">
             <TextBlock Text="Имя:" VerticalAlignment="Center" Margin="5"/>
-            <TextBox x:Name="txtName" Width="200" Margin="5"/>
+            <TextBox x:Name="txtName" Width="150" Margin="5"/>
             <TextBlock Text="Фамилия:" VerticalAlignment="Center" Margin="5"/>
-            <TextBox x:Name="txtLastName" Width="200" Margin="5"/>
+            <TextBox x:Name="txtLastName" Width="150" Margin="5"/>
+            <TextBlock Text="Email:" VerticalAlignment="Center" Margin="5"/>
+            <TextBox x:Name="txtEmail" Width="180" Margin="5"/>
             <TextBlock Text="Адрес:" VerticalAlignment="Center" Margin="5"/>
-            <TextBox x:Name="txtAddress" Width="200" Margin="5"/>
+            <TextBox x:Name="txtAddress" Width="180" Margin="5"/>
             <Button x:Name="btnPlaceOrder" Content="Заказать" Click="PlaceOrder_Click" Margin="5"/>
-        </StackPanel>
+        </WrapPanel>
         <ListBox x:Name="lstOrders" Grid.Row="1" Margin="10">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Margin="5">
                         <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="{Binding Address}" VerticalAlignment="Center" Margin="5"/>
+                        <TextBlock Text="{Binding Surname}" VerticalAlignment="Center" Margin="5"/>
+                        <TextBlock Text="{Binding Email}" VerticalAlignment="Center" Margin="5"/>
+                        <TextBlock Text="{Binding DeliveryAddress}" VerticalAlignment="Center" Margin="5"/>
                         <TextBlock Text="{Binding TotalPrice}" VerticalAlignment="Center" Margin="5"/>
                     </StackPanel>
                 </DataTemplate>

@@ -32,7 +32,6 @@ namespace ISIP324Kovalenko_WPF.Page
         {
             var button = sender as Button;
             var product = button?.DataContext as Product;
-
             if (product == null)
                 return;
 

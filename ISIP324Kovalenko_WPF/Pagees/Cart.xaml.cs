@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +22,20 @@ namespace ISIP324Kovalenko_WPF.Page
     /// </summary>
     public partial class Cart : System.Windows.Controls.Page
     {
+        ObservableCollection<CartItem> items { get; set; }
         public Cart()
         {
             InitializeComponent();
+
+            items = new ObservableCollection<CartItem>(Core.Context.CartItem.Include(c => c.Product).ToList());
+            lstCart.ItemsSource = items;
+            this.Loaded += Cart_Loaded;
+        }
+
+
+        private void Cart_Loaded(object sender, RoutedEventArgs e)
+        {
+            lstCart.Items.Refresh();
         }
 
         public static void AddToCart(Product product)
@@ -30,14 +43,25 @@ namespace ISIP324Kovalenko_WPF.Page
             if (product == null)
                 return;
 
-            var cartItem = new CartItem
-            {
-                ProductId = product.Id,
-                Quantity = 1,
-                AddedAt = DateTime.Now
-            };
+            var existingItem = Core.Context.CartItem.FirstOrDefault(c => c.ProductId == product.Id);
 
-            Core.Context.CartItem.Add(cartItem);
+            if (existingItem != null)
+            {
+                existingItem.Quantity += 1;
+                existingItem.AddedAt = DateTime.Now;
+            }
+            else
+            {
+                var cartItem = new CartItem
+                {
+                    ProductId = product.Id,
+                    Quantity = 1,
+                    AddedAt = DateTime.Now
+                };
+
+                Core.Context.CartItem.Add(cartItem);
+            }
+
             Core.Context.SaveChanges();
         }
 
@@ -47,13 +71,20 @@ namespace ISIP324Kovalenko_WPF.Page
             var cartItem = button?.DataContext as CartItem;
             if (cartItem == null)
                 return;
-            Core.Context.CartItem.Remove(cartItem);
-            Core.Context.SaveChanges();
+
+            var trackedItem = Core.Context.CartItem.Find(cartItem.Id);
+            if (trackedItem != null)
+            {
+                Core.Context.CartItem.Remove(trackedItem);
+                Core.Context.SaveChanges();
+            }
+
+            items.Remove(cartItem);
         }
 
         private void Checkout_Click(object sender, RoutedEventArgs e)
         {
-            
+            NavigationService?.Navigate(new Page.Order());
         }
     }
 }

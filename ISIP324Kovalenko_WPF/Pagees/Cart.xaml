@@ -14,9 +14,10 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" Margin="5">
-                            <Image Source="{Binding ImagePath}" Width="50" Height="50" Margin="5"/>
-                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="5"/>
-                            <TextBlock Text="{Binding Price}" VerticalAlignment="Center" Margin="5"/>
+                            <Image Source="{Binding Product.ImagePath}" Width="50" Height="50" Margin="5"/>
+                            <TextBlock Text="{Binding Product.Name}" VerticalAlignment="Center" Margin="5"/>
+                            <TextBlock Text="{Binding Product.Price}" VerticalAlignment="Center" Margin="5"/>
+                            <TextBlock Text="{Binding Quantity}" VerticalAlignment="Center" Margin="5"/>
                             <Button Content="Удалить" Click="RemoveFromCart_Click" Margin="5"/>
                         </StackPanel>
                     </DataTemplate>
