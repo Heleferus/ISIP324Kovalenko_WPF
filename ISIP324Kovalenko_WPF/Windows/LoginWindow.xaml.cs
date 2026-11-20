@@ -18,7 +18,7 @@ namespace ISIP324Kovalenko_WPF.Windows
     /// <summary>
     /// Логика взаимодействия для LoginWindow.xaml
     /// </summary>
-    public partial class LoginWindow : Page
+    public partial class LoginWindow : Window
     {
         public LoginWindow()
         {
@@ -34,7 +34,13 @@ namespace ISIP324Kovalenko_WPF.Windows
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-           
+           Windows.RegisterWindow registerWindow = new Windows.RegisterWindow();
+           registerWindow.Show();
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

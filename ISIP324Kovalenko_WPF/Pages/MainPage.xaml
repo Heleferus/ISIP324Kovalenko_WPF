@@ -19,9 +19,11 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />   
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <TextBlock Text="Афиша" FontSize="24" FontWeight="Bold" VerticalAlignment="Center" />
+            <ComboBox Grid.Column="3" Width="200" Height="30" Margin="0,0,8,0" HorizontalAlignment="Right" Padding="5" />
             <TextBox Grid.Row="0" Grid.Column="0"  Width="200" Height="30" Margin="0,0,8,0" HorizontalAlignment="Right" Padding="5" />
             <Button Grid.Row="0" Grid.Column="1" Content="Поиск" Width="100" Height="30" Click="SearchButton_Click" HorizontalAlignment="Right"/>
             <Button Grid.Row="0" Grid.Column="2" Content="Логин" Width="100" Height="30" Margin="8,0,0,0" Click="LoginButton_Click"/>
