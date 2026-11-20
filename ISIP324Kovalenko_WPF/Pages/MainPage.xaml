@@ -50,6 +50,7 @@
                                 <TextBlock Text="{Binding Description}" TextWrapping="Wrap" MaxWidth="600"/>
                                 <TextBlock Text="{Binding Rating}" FontSize="16" FontWeight="Bold"/>
                                 <TextBlock Text="{Binding ReleaseDate}" FontSize="14"/>
+                                <TextBlock Text="{Binding AgeRating}" FontSize="14"/>
                                 <Button Content="Подробнее" Width="100" Height="30" Margin="0,8,0,0" Click="DetailsButton_Click"/>
                             </StackPanel>
                         </StackPanel>

@@ -21,14 +21,23 @@ namespace ISIP324Kovalenko_WPF.Pages
     /// </summary>
     public partial class MainPage : Page
     {
+        private Movie currentmovie;
         ObservableCollection<Movie> movies = new ObservableCollection<Movie>();
-        public MainPage()
+
+        public MainPage() : this(null)
+        {
+        }
+
+        public MainPage(Movie selectedmovie)
         {
             InitializeComponent();
             movies = new ObservableCollection<Movie>(Core.Context.Movie.ToList());
             lstMovies.ItemsSource = movies;
             SortComboBox.SelectedIndex = 0;
             UpdateAuthButton();
+            currentmovie = selectedmovie;
+            DataContext = currentmovie;
+
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
@@ -88,7 +97,12 @@ namespace ISIP324Kovalenko_WPF.Pages
 
         private void DetailsButton_Click(object sender, RoutedEventArgs e)
         {
-
+           var button = sender as Button;
+           var selectedMovie = button?.DataContext as Movie;
+            if (selectedMovie != null)
+            {
+                NavigationService.Navigate(new MoviePage(selectedMovie));
+            }
         }
 
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,29 @@ namespace ISIP324Kovalenko_WPF.Pages
     /// </summary>
     public partial class MoviePage : Page
     {
-        public MoviePage()
+        ObservableCollection<Hall> halls = new ObservableCollection<Hall>();
+
+        public MoviePage() : this(null)
         {
+        }
+
+        public MoviePage(Movie movie)
+        {
+
             InitializeComponent();
+            DataContext = movie;
+            halls = new ObservableCollection<Hall>(Core.Context.Hall.ToList());
+            lstHalls.ItemsSource = halls;
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
+
+        private void BookButton_Click(object sender, RoutedEventArgs e)
+        {
+           
         }
     }
 }
