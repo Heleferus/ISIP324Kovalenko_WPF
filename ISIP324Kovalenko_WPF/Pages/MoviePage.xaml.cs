@@ -44,7 +44,26 @@ namespace ISIP324Kovalenko_WPF.Pages
 
         private void BookButton_Click(object sender, RoutedEventArgs e)
         {
-           
+           var button = sender as Button;
+           var selectedSession = button?.DataContext as ISIP324Kovalenko_WPF.Session;
+           if (selectedSession != null)
+            {
+                int bookedSeatsCount = Core.Context.Ticket.Count(b => b.SessionId == selectedSession.Id);
+                int totalSeats = selectedSession.Hall.SeatsCount;
+                if (bookedSeatsCount >= totalSeats)
+                {
+                    MessageBox.Show("Все места на эту сессию уже забронированы.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                if (Core.CurrentUser == null)
+                {
+                    MessageBox.Show("Пожалуйста, войдите в cистему, чтобы забронировать билет.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                NavigationService.Navigate(new Session(selectedSession));
+            }
+
         }
     }
 }

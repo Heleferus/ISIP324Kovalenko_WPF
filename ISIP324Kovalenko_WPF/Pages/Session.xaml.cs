@@ -20,9 +20,112 @@ namespace ISIP324Kovalenko_WPF.Pages
     /// </summary>
     public partial class Session : Page
     {
-        public Session()
+        private ISIP324Kovalenko_WPF.Session currentsession;
+        private int? selectedseat;
+        public Session(ISIP324Kovalenko_WPF.Session session)
         {
             InitializeComponent();
+            DataContext = session;
+            currentsession = session;
+
+            SessionInfoText.Text = $"{currentsession.Movie.Title} — Зал №{currentsession.Hall.HallNumber} ({currentsession.SessionDate:dd.MM.yyyy} {currentsession.SessionTime})";
+            SessionPriceText.Text = $"Цена билета: {currentsession.Price} руб.";
+
+            LoadSeats();
+        }
+
+        private void LoadSeats()
+        {
+            SeatsPanel.Children.Clear();
+            List<int> bookedSeats = Core.Context.Ticket.Where(t => t.SessionId == currentsession.Id).Select(t => t.SeatNumber).ToList();
+            bool hideOccupied = HideOccupiedCheckBox.IsChecked == true;
+            int totalSeats = currentsession.Hall.SeatsCount;
+
+            for (int seatnumber = 1; seatnumber <= totalSeats; seatnumber++)
+            {
+                bool IsOccupied = bookedSeats.Contains(seatnumber);
+                if (hideOccupied && IsOccupied)
+                {
+                    continue; 
+                }
+
+                Button seatButton = new Button
+                {
+                    Content = seatnumber.ToString(),
+                    Tag = seatnumber,
+                    Width = 40,
+                    Height = 40,
+                    Margin = new Thickness(5),
+                    FontSize = 14,
+                    FontWeight = FontWeights.Bold,
+                };
+
+                if(IsOccupied)
+                {
+                    seatButton.Background = Brushes.Red;
+                    seatButton.IsEnabled = false;
+                }
+                else if (selectedseat == seatnumber)
+                {
+                    seatButton.Background = Brushes.Blue;
+                    seatButton.Click += SeatButton_Click;
+                }
+                else
+                {
+                    seatButton.Background = Brushes.Green;
+                    seatButton.Click += SeatButton_Click;
+                }
+                SeatsPanel.Children.Add(seatButton);
+            }
+        }
+
+        private void SeatButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button clickedButton = sender as Button;
+            if (clickedButton != null)
+            {
+                int seatNumber = (int)clickedButton.Tag;
+                selectedseat = seatNumber;
+                SelectedSeatText.Text = $"Выбранное место: {seatNumber}";
+                LoadSeats();
+            }
+        }
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
+
+        private void BuyTicketButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Core.CurrentUser == null)
+            {
+                MessageBox.Show("Пожалуйста, войдите в систему, чтобы купить билет.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (selectedseat == null)
+            {
+                MessageBox.Show("Пожалуйста, выберите место.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            var newTicket = new ISIP324Kovalenko_WPF.Ticket
+            {
+                SessionId = currentsession.Id,
+                UserId = Core.CurrentUser.Id,
+                SeatNumber = selectedseat.Value
+            };
+            Core.Context.Ticket.Add(newTicket);
+            Core.Context.SaveChanges();
+            MessageBox.Show("Билет успешно куплен!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            selectedseat = null;
+            SelectedSeatText.Text = "Место не выбрано";
+            LoadSeats();
+        }
+
+        private void HideOccupiedCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            LoadSeats();
         }
     }
 }

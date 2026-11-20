@@ -27,6 +27,11 @@ namespace ISIP324Kovalenko_WPF
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
+            if (Core.CurrentUser == null)
+            {
+                MessageBox.Show("Пожалуйста, войдите в систему, чтобы получить доступ к персональной странице.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             MainFrame.Navigate(new Uri("Pages/PersonalPage.xaml", UriKind.Relative));
 
         }
