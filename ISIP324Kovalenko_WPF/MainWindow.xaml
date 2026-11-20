@@ -3,10 +3,55 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ISIP324Kovalenko_WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Кинотеатр"
+        Height="760"
+        Width="1180"
+        MinHeight="600"
+        MinWidth="900"
+        WindowStartupLocation="CenterScreen"
+        Background="#F4F6FA">
+    <Window.Resources>
+        <Style TargetType="MenuItem">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Padding" Value="14,10" />
+        </Style>
+    </Window.Resources>
+
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="76" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="White" BorderBrush="White" BorderThickness="0,0,0,1">
+            <Grid Margin="32,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="КИНО" Foreground="Red" FontSize="23" FontWeight="Bold" />
+                    <TextBlock Text="МИР" Foreground="Blue" FontSize="23" FontWeight="Bold" />
+                </StackPanel>
+
+                <Menu Grid.Column="1" VerticalAlignment="Center" Background="Transparent" BorderThickness="0">
+                    <MenuItem Header="Главная" FontWeight="SemiBold" Click="MenuItem_Click_1" />
+                    <MenuItem Header="Личная страница" FontWeight="SemiBold" Click="MenuItem_Click" />
+                </Menu>
+
+            </Grid>
+        </Border>
+
+        <Frame Grid.Row="1"
+               x:Name="MainFrame"
+               NavigationUIVisibility="Hidden"
+               Source="Pages/MainPage.xaml"
+               Background="White" 
+        />
         
     </Grid>
 </Window>

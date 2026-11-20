@@ -24,5 +24,16 @@ namespace ISIP324Kovalenko_WPF
         {
             InitializeComponent();
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new Uri("Pages/PersonalPage.xaml", UriKind.Relative));
+
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new Uri("Pages/MainPage.xaml", UriKind.Relative));
+        }
     }
 }
