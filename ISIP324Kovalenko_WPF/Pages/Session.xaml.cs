@@ -109,18 +109,7 @@ namespace ISIP324Kovalenko_WPF.Pages
                 return;
             }
 
-            var newTicket = new ISIP324Kovalenko_WPF.Ticket
-            {
-                SessionId = currentsession.Id,
-                UserId = Core.CurrentUser.Id,
-                SeatNumber = selectedseat.Value
-            };
-            Core.Context.Ticket.Add(newTicket);
-            Core.Context.SaveChanges();
-            MessageBox.Show("Билет успешно куплен!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-            selectedseat = null;
-            SelectedSeatText.Text = "Место не выбрано";
-            LoadSeats();
+            NavigationService.Navigate(new Ticket(currentsession, selectedseat.Value));
         }
 
         private void HideOccupiedCheckBox_Checked(object sender, RoutedEventArgs e)

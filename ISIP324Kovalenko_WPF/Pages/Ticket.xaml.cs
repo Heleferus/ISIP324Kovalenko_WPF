@@ -20,9 +20,10 @@ namespace ISIP324Kovalenko_WPF.Pages
     /// </summary>
     public partial class Ticket : Page
     {
-        public Ticket()
+        public Ticket(ISIP324Kovalenko_WPF.Session session, int seatNumber)
         {
             InitializeComponent();
+            DataContext = session;
         }
     }
 }
