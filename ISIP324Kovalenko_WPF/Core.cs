@@ -9,5 +9,7 @@ namespace ISIP324Kovalenko_WPF
     internal class Core
     {
         public static pr10Entities Context = new pr10Entities();
+
+        public static User CurrentUser { get; set; }
     }
 }

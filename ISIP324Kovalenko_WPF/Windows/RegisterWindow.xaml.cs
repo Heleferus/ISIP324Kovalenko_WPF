@@ -26,7 +26,39 @@ namespace ISIP324Kovalenko_WPF.Windows
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-           
+            string login = LoginTextBox.Text.Trim();
+            string fullName = FullNameTextBox.Text.Trim();
+            string password = PasswordBox.Password;
+
+            if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(fullName) || string.IsNullOrWhiteSpace(password))
+            {
+                MessageBox.Show("Заполните логин, ФИО и пароль.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (login.Length > 50 || password.Length > 50 || fullName.Length > 100)
+            {
+                MessageBox.Show("Максимальная длина: логин и пароль — 50 символов, ФИО — 100 символов.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            var existingUser = Core.Context.User.FirstOrDefault(user => user.Login == login);
+            if (existingUser != null)
+            {
+                MessageBox.Show("Пользователь с таким логином уже существует.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            User newUser = new User
+            {
+                Login = login,
+                FullName = fullName,
+                Password = password
+            };
+            Core.Context.User.Add(newUser);
+            Core.Context.SaveChanges();
+            MessageBox.Show("Регистрация прошла успешно", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            this.Close();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

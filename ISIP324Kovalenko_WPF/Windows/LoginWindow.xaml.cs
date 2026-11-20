@@ -17,7 +17,8 @@ namespace ISIP324Kovalenko_WPF.Windows
 {
     /// <summary>
     /// Логика взаимодействия для LoginWindow.xaml
-    /// </summary>
+    /// </summary>\
+    
     public partial class LoginWindow : Window
     {
         public LoginWindow()
@@ -27,9 +28,30 @@ namespace ISIP324Kovalenko_WPF.Windows
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-           
-            
-           
+            if (Core.CurrentUser != null)
+            {
+                MessageBox.Show("В аккаунт уже выполнен вход.", "Вход", MessageBoxButton.OK, MessageBoxImage.Information);
+                Close();
+                return;
+            }
+
+            string login = UsernameTextBox.Text.Trim();
+            if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(PasswordBox.Password))
+            {
+                MessageBox.Show("Пожалуйста, введите имя пользователя и пароль.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            var user = Core.Context.User.FirstOrDefault(u => u.Login == login && u.Password == PasswordBox.Password);
+            if (user == null)
+            {
+                MessageBox.Show("Неверное имя пользователя или пароль.", "Ошибка входа", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            Core.CurrentUser = user;
+            MessageBox.Show("Вы успешно вошли в систему!", "Вход", MessageBoxButton.OK, MessageBoxImage.Information);
+            DialogResult = true;
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)

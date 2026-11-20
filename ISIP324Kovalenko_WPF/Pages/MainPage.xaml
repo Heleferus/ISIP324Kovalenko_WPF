@@ -23,10 +23,17 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <TextBlock Text="Афиша" FontSize="24" FontWeight="Bold" VerticalAlignment="Center" />
-            <ComboBox Grid.Column="3" Width="200" Height="30" Margin="0,0,8,0" HorizontalAlignment="Right" Padding="5" />
-            <TextBox Grid.Row="0" Grid.Column="0"  Width="200" Height="30" Margin="0,0,8,0" HorizontalAlignment="Right" Padding="5" />
+            <ComboBox x:Name="SortComboBox"
+                      Grid.Row="0" Grid.Column="3"
+                      Width="200" Height="30" Margin="8,0,8,0"
+                      HorizontalAlignment="Right" Padding="5"
+                      SelectionChanged="SortComboBox_SelectionChanged">
+                <ComboBoxItem Content="По названию" Tag="Title" />
+                <ComboBoxItem Content="По рейтингу" Tag="Rating" />
+            </ComboBox>
+            <TextBox Grid.Row="0" Grid.Column="0"  Width="200" Height="30" Margin="0,0,8,0" HorizontalAlignment="Right" Padding="5" x:Name="SearchTextBox" />
             <Button Grid.Row="0" Grid.Column="1" Content="Поиск" Width="100" Height="30" Click="SearchButton_Click" HorizontalAlignment="Right"/>
-            <Button Grid.Row="0" Grid.Column="2" Content="Логин" Width="100" Height="30" Margin="8,0,0,0" Click="LoginButton_Click"/>
+            <Button x:Name="AuthButton" Grid.Row="0" Grid.Column="2" Content="Войти" Width="150" Height="30" Margin="8,0,0,0" Click="LoginButton_Click"/>
         </Grid>
 
         <ListBox Grid.Row="1" ItemsSource="{Binding Movies}" Margin="32,16,32,16"
@@ -41,6 +48,8 @@
                             <StackPanel>
                                 <TextBlock Text="{Binding Title}" FontSize="18" FontWeight="Bold"/>
                                 <TextBlock Text="{Binding Description}" TextWrapping="Wrap" MaxWidth="600"/>
+                                <TextBlock Text="{Binding Rating}" FontSize="16" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding ReleaseDate}" FontSize="14"/>
                                 <Button Content="Подробнее" Width="100" Height="30" Margin="0,8,0,0" Click="DetailsButton_Click"/>
                             </StackPanel>
                         </StackPanel>

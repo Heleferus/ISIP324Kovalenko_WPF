@@ -27,23 +27,68 @@ namespace ISIP324Kovalenko_WPF.Pages
             InitializeComponent();
             movies = new ObservableCollection<Movie>(Core.Context.Movie.ToList());
             lstMovies.ItemsSource = movies;
-
+            SortComboBox.SelectedIndex = 0;
+            UpdateAuthButton();
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (string.IsNullOrWhiteSpace(SearchTextBox.Text))
+            {
+                movies = new ObservableCollection<Movie>(Core.Context.Movie.ToList());
+            }
+            else
+            {
+                string searchText = SearchTextBox.Text.ToLower();
+                var filteredMovies = Core.Context.Movie.Where(movie => movie.Title.ToLower().Contains(searchText)).ToList();
+                movies = new ObservableCollection<Movie>(filteredMovies);
+            }
+            lstMovies.ItemsSource = movies;
         }
 
        private void LoginButton_Click(object sender, RoutedEventArgs e)
        {
-            Windows.LoginWindow loginWindow = new Windows.LoginWindow();
-            loginWindow.ShowDialog();
+           if (Core.CurrentUser != null)
+           {
+               Core.CurrentUser = null;
+               UpdateAuthButton();
+               MessageBox.Show("Вы вышли из аккаунта.", "Выход", MessageBoxButton.OK, MessageBoxImage.Information);
+               return;
+           }
+
+           Windows.LoginWindow loginWindow = new Windows.LoginWindow
+           {
+               Owner = Window.GetWindow(this)
+           };
+           loginWindow.ShowDialog();
+           UpdateAuthButton();
        }
+
+       private void UpdateAuthButton()
+       {
+           AuthButton.Content = Core.CurrentUser == null ? "Войти" : "Выйти из аккаунта";
+       }
+
+       private void SortComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+       {
+           if (SortComboBox.SelectedItem == null)
+                return;
+
+            string sortBy = (SortComboBox.SelectedItem as ComboBoxItem)?.Tag?.ToString();
+            List<Movie> sortedMovies;
+
+            if (sortBy == "Rating")
+                sortedMovies = movies.OrderByDescending(movie => movie.Rating).ToList();
+            else
+                sortedMovies = movies.OrderBy(movie => movie.Title).ToList();
+
+            movies = new ObservableCollection<Movie>(sortedMovies);
+            lstMovies.ItemsSource = movies;
+        }
 
         private void DetailsButton_Click(object sender, RoutedEventArgs e)
         {
-          
+
         }
 
     }
