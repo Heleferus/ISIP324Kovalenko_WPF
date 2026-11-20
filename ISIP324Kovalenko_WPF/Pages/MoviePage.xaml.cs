@@ -33,7 +33,8 @@ namespace ISIP324Kovalenko_WPF.Pages
             InitializeComponent();
             DataContext = movie;
             halls = new ObservableCollection<Hall>(Core.Context.Hall.ToList());
-            lstHalls.ItemsSource = halls;
+            var movieSession = Core.Context.Session.Where(s => s.MovieId == movie.Id).OrderBy(s => s.SessionTime).ThenBy(s => s.SessionTime).ToList();
+            lstSessions.ItemsSource = movieSession;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

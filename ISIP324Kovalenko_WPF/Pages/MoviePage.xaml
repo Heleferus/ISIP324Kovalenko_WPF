@@ -41,17 +41,15 @@
         <Button Grid.Column="0" Grid.Row="1" Content="Назад" Width="100" Height="30" Margin="32,0,0,16" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="BackButton_Click" />
 
 
-        <ListBox Grid.Column="1" Grid.Row="1" x:Name="lstHalls" Margin="32,16,32,16" ItemsSource="{Binding halls}">
+        <ListBox Grid.Column="1" Grid.Row="1" x:Name="lstSessions" Margin="32,16,32,16" ItemsSource="{Binding movieSession}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
-                        <TextBlock Text="Зал: " FontSize="16" FontWeight="Bold" Margin="0,0,8,0"/>
-                        <TextBlock Text="{Binding HallNumber}" FontSize="16" FontWeight="Bold" Margin="0,0,8,0"/>
-                        <TextBlock Text="Количество мест: " FontSize="16" Margin="0,0,8,0"/>
-                        <TextBlock Text="{Binding SeatsCount}" FontSize="16" Margin="0,0,8,0"/>
-                        <TextBlock Text="Рейтинг: " FontSize="16" Margin="0,0,8,0"/>
-                        <TextBlock Text="{Binding Rating}" FontSize="16" Margin="0,0,8,0"/>
-                        <Button Content="Забронировать" Width="100" Height="30" Click="BookButton_Click"/>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBlock Text="{Binding Hall.HallNumber, StringFormat='Зал №{0}'}" FontWeight="Bold" Margin="0,0,10,0"/>
+                        <TextBlock Text="{Binding SessionDate, StringFormat='dd.MM.yyyy'}" Margin="0,0,10,0"/>
+                        <TextBlock Text="{Binding SessionTime}" Margin="0,0,10,0"/>
+                        <TextBlock Text="{Binding Price, StringFormat='{}{0} ₽'}" Margin="0,0,15,0"/>
+                        <Button Content="Забронировать" Click="BookButton_Click"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
