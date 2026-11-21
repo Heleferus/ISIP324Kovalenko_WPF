@@ -97,12 +97,6 @@ namespace ISIP324Kovalenko_WPF.Pages
 
         private void BuyTicketButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Core.CurrentUser == null)
-            {
-                MessageBox.Show("Пожалуйста, войдите в систему, чтобы купить билет.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
             if (selectedseat == null)
             {
                 MessageBox.Show("Пожалуйста, выберите место.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);

@@ -23,6 +23,12 @@ namespace ISIP324Kovalenko_WPF.Pages
         public PersonalPage()
         {
             InitializeComponent();
+
+            if (Core.CurrentUser == null)return;
+
+            DataContext = Core.CurrentUser;
+
+            PurchasedTickets.ItemsSource = Core.Context.Ticket.Where(ticket => ticket.UserId == Core.CurrentUser.Id).OrderByDescending(ticket => ticket.Id).ToList();
         }
     }
 }

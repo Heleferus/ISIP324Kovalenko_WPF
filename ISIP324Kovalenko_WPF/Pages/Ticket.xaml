@@ -9,6 +9,10 @@
       Title="Ticket">
 
     <Grid>
-        
+        <StackPanel Margin="0,0,0,12" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock x:Name="TicketInfoText" FontSize="20" FontWeight="Bold"/>
+            <TextBlock x:Name="TicketPriceText" FontSize="15" FontWeight="SemiBold" Margin="0,4,0,0"/>
+            <Button x:Name="RegisterTicketButton" Content="Потдвердить оформление билета" Width="190" Height="34" Click="RegisterTicketButton_Click"/>
+        </StackPanel>
     </Grid>
 </Page>

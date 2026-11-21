@@ -21,8 +21,6 @@ namespace ISIP324Kovalenko_WPF.Pages
     /// </summary>
     public partial class MoviePage : Page
     {
-        ObservableCollection<Hall> halls = new ObservableCollection<Hall>();
-
         public MoviePage() : this(null)
         {
         }
@@ -32,7 +30,6 @@ namespace ISIP324Kovalenko_WPF.Pages
 
             InitializeComponent();
             DataContext = movie;
-            halls = new ObservableCollection<Hall>(Core.Context.Hall.ToList());
             var movieSession = Core.Context.Session.Where(s => s.MovieId == movie.Id).OrderBy(s => s.SessionTime).ThenBy(s => s.SessionTime).ToList();
             lstSessions.ItemsSource = movieSession;
         }
@@ -58,7 +55,7 @@ namespace ISIP324Kovalenko_WPF.Pages
 
                 if (Core.CurrentUser == null)
                 {
-                    MessageBox.Show("Пожалуйста, войдите в cистему, чтобы забронировать билет.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Пожалуйста, войдите в систему, чтобы забронировать билет.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
                 NavigationService.Navigate(new Session(selectedSession));
